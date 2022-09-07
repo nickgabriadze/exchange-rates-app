@@ -9,7 +9,7 @@ export function useAlphaCodes(){
     for(let i = 0; i < values.length; i++){
         alphaCodes.push([values[i].alphaCode, parseFloat(values[i].rate), values[i].name])
     }
-    
+    alphaCodes.push(["USD", 1 ,"United States Dollar"])
     return alphaCodes;
 }
 
