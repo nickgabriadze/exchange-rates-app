@@ -1,0 +1,13 @@
+.convert-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: 30rem;
+    height: 30rem;
+    border-radius: 10px;
+    background-color: rgb(94, 94, 94);
+    font-family: 'Poppins', 'sans-serif';
+    color: white;
+}
+
