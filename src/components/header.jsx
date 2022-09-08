@@ -13,7 +13,7 @@ export function Header() {
                         <img src={ExchangeIcon} alt={"Exchange Symbol"}></img>
 
                     </div>
-                    <p>Updates every 24 hours</p>
+                    <p>Updates once every 24 hours</p>
                 </div>
                 <Link to="/convert" style={{color: 'white', textDecoration:'none'}}><motion.p whileHover={{scale:1.1}} 
                 whileTap={{scale: 0.8}}
