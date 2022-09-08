@@ -4,7 +4,7 @@ import DropDownFrom from './dropDownFrom';
 import DropDownTo from './dropDownTo';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import rateReducer, { setValue } from '../features/rateReducer';
+import { setValue } from '../features/rateReducer';
 import { calculate } from '../features/rateReducer';
 
 
@@ -14,7 +14,7 @@ export function Convert() {
     const [calculated, setCalculated] = useState(false)
     const dispatch = useDispatch();
 
-    const { from, to, result } = useSelector(state => state.rateReducer)
+    const { result } = useSelector(state => state.rateReducer)
     return (
         <>
             <Link to="/" style={{ color: 'white', textDecoration: 'none', fontFamily: 'Oxygen', paddingLeft: '5px' }}> {'< Go Back'}</Link>
@@ -27,16 +27,18 @@ export function Convert() {
                         <p>Value</p>
                         <input type="number" autoComplete="off" style={{ outline: 'none', fontFamily: 'Oxygen', fontSize: '20px' }} id='value' onChange={(e) => setRateValue(e.target.value)} value={rateValue}></input>
                         <div id='calc' onClick={() => {
-                            setCalculated(!calculated);
+                           
                             dispatch(setValue({
                                 value: parseFloat(rateValue)
                             }));
-                            
+
+                            dispatch(calculate())
+                            setCalculated(!calculated); 
                         }}>
                             Calculate
                         </div>
                         <div id='result'>
-                            {calculated ? rateValue  : ''}
+                            {calculated ? result : ''}
                         </div>
                     </div>
 

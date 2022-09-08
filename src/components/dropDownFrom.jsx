@@ -8,12 +8,10 @@ import "../css/dropDown.css";
 
 function DropDownFrom() {
 
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState(['', 0]);
     const [clicked, setClicked] = useState(false);
     const alphaCodes = useAlphaCodes();
     const dispatch = useDispatch();
-
-
 
     return (
         <>
@@ -23,17 +21,22 @@ function DropDownFrom() {
                     <h3 style={{ textAlign: 'center' }}>From</h3>
                     <div id='input-dropdown-menu'>
                         <div id='input-with-select'>
-                            <div><input onClick={() => { setClicked(true) }} onChange={(e) => { setValue(e.target.value) }} value={value}></input></div>
-                            <h4 onClick={() => { setClicked(false); dispatch(setFrom({
-                                fromCurrency: alphaCodes.filter(each => each[0] === value)
+                            <div><input onClick={() => { setClicked(true) }} onChange={(e) => { setValue([e.target.value, alphaCodes.filter(each => each[0] === value)[1]]) }} value={value[0]}></input></div>
+                            <h4 onClick={() => {
+                                setClicked(false);
+                                
+                               
+                                dispatch(setFrom({
+                                    fromCurrency: value
 
-                            }))}}>OK</h4>
+                                }))
+                            }}>OK</h4>
                         </div>
                         {clicked ?
                             <div id='actual-menu'>
-                                {alphaCodes.filter(each => each[0].toLowerCase().match(new RegExp(value.toLowerCase(), 'g'))).map(each => {
+                                {alphaCodes.filter(each => each[0].toLowerCase().match(new RegExp(value[0].toLowerCase(), 'g'))).map(each => {
                                     return (
-                                        <div key={nanoid()}onClick={()=>{setValue(each[0])}}style={{cursor: 'pointer'}}>
+                                        <div key={nanoid()} onClick={() => { setValue(each) }} style={{ cursor: 'pointer' }}>
                                             {each[0]} - {each[2]}
                                             <hr></hr>
                                         </div>)
